@@ -13,6 +13,7 @@ body {
   display: grid;
   place-items: center;
   overflow: hidden;
+  background: #171720;
 }
 .container {
   text-align: center;
@@ -21,18 +22,19 @@ body {
 .container p {
   font-size: 30px;
   margin: 10px 0;
+  color: white;
 }
 .container span{
   font-size: 14px;
-  color: gray;
+  color: #969696;
 }
 .deal-wheel {
   --size: clamp(250px, 80vmin, 700px);
   --lg-hs: 0 3%;
   --lg-stop: 50%;
   --lg: linear-gradient(
-      hsl(var(--lg-hs) 0%) 0 var(--lg-stop),
-      hsl(var(--lg-hs) 20%) var(--lg-stop) 100%
+      hsl(var(--lg-hs) 30%) 0 var(--lg-stop),
+      hsl(var(--lg-hs) 25%) var(--lg-stop) 100%
     );
   
   position: relative;
@@ -118,10 +120,12 @@ body {
 }
 
 .btn-spin {
-  color: hsl(0deg 0% 100%);
+  color: white;
   background: var(--lg);
   border: none;
-  font-family: inherit;
+  text-shadow: 0 0 5px black;
+  font-family: Arial, roboto;
+  font-weight: 600;
   font-size: inherit;
   line-height: inherit;
   text-transform: inherit;
@@ -217,13 +221,12 @@ body {
 
 /* ------------------------ Watermark (Please Ignore) ----------------------- */
 .watermark-ctr {
-  --clr-button-bg: #141414;
+  --clr-button-bg: #1c1e1e;
   --clr-button: 72, 39, 236;
   --clr-text: #ffffff;
 
-  position: fixed;
   bottom: 1.5rem;
-  right: 1.5rem;
+  align-content: center;
   z-index: 1000;
 }
 .watermark-ctr a {
@@ -331,7 +334,7 @@ body {
   transform: scale(var(--generate-button-star-3-scale)) translateZ(0);
   transform-origin: 25% 85.42%;
 }
-.generate-button:hover {
+.generate-button {
   --generate-button-scale: 1.01;
   --generate-button-shadow-wide: rgba(var(--clr-button), 0.4);
   --generate-button-shadow-inset: rgba(255, 255, 255, 0.35);
@@ -339,16 +342,16 @@ body {
   color: var(--clr-text);
   background-color: rgba(var(--clr-button));
 }
-.generate-button:hover .stroke svg {
+.generate-button .stroke svg {
   animation: stroke 2s linear infinite;
 }
-.generate-button:hover:before {
+.generate-button:before {
   opacity: 1;
 }
-.generate-button:hover span:before {
+.generate-button span:before {
   opacity: 0;
 }
-.generate-button:hover:active {
+.generate-button:active {
   --generate-button-scale: 1.05;
 }
 @keyframes stroke {

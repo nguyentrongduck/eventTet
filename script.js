@@ -4,6 +4,9 @@
  * @param color [string] background color of the prize
  * @param reaction ['resting' | 'dancing' | 'laughing' | 'shocked'] Sets the reaper's animated reaction
  */
+
+document.addEventListener('DOMContentLoaded', function() {
+
 const prizes = [
   {
     text: "2 cái nịt",
@@ -13,7 +16,7 @@ const prizes = [
   { 
     text: "2.000đ",
     color: "hsl(173 58% 39%)",
-    reaction: "shocked"
+    reaction: "laughing"
   },
   { 
     text: "10.000đ",
@@ -23,12 +26,12 @@ const prizes = [
   {
     text: "Cái nịt",
     color: "hsl(27 87% 67%)",
-    reaction: "shocked"
+    reaction: "dancing"
   },
   {
     text: "1000đ",
     color: "hsl(12 76% 61%)",
-    reaction: "dancing"
+    reaction: "laughing"
   },
   {
     text: "Chúc bạn may mắn lần sau",
@@ -43,13 +46,14 @@ const prizes = [
   {
     text: "5000đ",
     color: "hsl(140 36% 74%)",
-    reaction: "dancing"
+    reaction: "shokced"
   }
 ];
 
 const wheel = document.querySelector(".deal-wheel");
 const spinner = wheel.querySelector(".spinner");
 const trigger = wheel.querySelector(".btn-spin");
+var checkvar = localStorage.getItem('checkvar');
 const ticker = wheel.querySelector(".ticker");
 const reaper = wheel.querySelector(".grim-reaper");
 const prizeSlice = 360 / prizes.length;
@@ -61,7 +65,13 @@ let tickerAnim;
 let rotation = 0;
 let currentSlice = 0;
 let prizeNodes;
-
+if (checkvar === true){
+  trigger.textContent = "Đã quay";
+  trigger.disabled = true;
+} else {
+  trigger.textContent = "Quay";
+  trigger.disabled = false;
+}
 const createPrizeNodes = () => {
   prizes.forEach(({ text, color, reaction }, i) => {
     const rotation = ((prizeSlice * i) * -1) - prizeOffset;
@@ -134,6 +144,8 @@ trigger.addEventListener("click", () => {
   }
 
   trigger.disabled = true;
+  localStorage.setItem("checkvar", "true");
+  trigger.textContent = "Đã quay";
   rotation = Math.floor(Math.random() * 360 + spinertia(2000, 5000));
   prizeNodes.forEach((prize) => prize.classList.remove(selectedClass));
   wheel.classList.add(spinClass);
@@ -144,7 +156,7 @@ trigger.addEventListener("click", () => {
 
 spinner.addEventListener("transitionend", () => {
   cancelAnimationFrame(tickerAnim);
-  trigger.disabled = false;
+  //trigger.disabled = false;
   trigger.focus();
   rotation %= 360;
   selectPrize();
@@ -253,4 +265,6 @@ document.querySelectorAll(".generate-button").forEach((button) => {
       }
     });
   });
+});
+
 });
