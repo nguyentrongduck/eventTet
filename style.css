@@ -6,13 +6,13 @@
 
 html,
 body {
-  height: 100%;
+  height: 100vh;
 }
 
 body {
   display: grid;
   place-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
   background: #171720;
 }
 .container {
@@ -29,7 +29,7 @@ body {
   color: #969696;
 }
 .deal-wheel {
-  --size: clamp(250px, 80vmin, 700px);
+  --size: 300px;
   --lg-hs: 0 3%;
   --lg-stop: 50%;
   --lg: linear-gradient(
@@ -51,7 +51,7 @@ body {
 }
 
 .deal-wheel > * {
-  grid-area: spinner
+  grid-area: spinner;
 }
 
 .deal-wheel .btn-spin {
@@ -63,6 +63,7 @@ body {
   position: relative;
   display: grid;
   align-items: center;
+  margin-top: 15px;
   grid-template-areas: "spinner";
   width: var(--size);
   height: var(--size);
@@ -121,6 +122,7 @@ body {
 
 .btn-spin {
   color: white;
+  margin-bottom: 15px;
   background: var(--lg);
   border: none;
   text-shadow: 0 0 5px black;
