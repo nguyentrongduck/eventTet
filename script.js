@@ -54,6 +54,8 @@ const wheel = document.querySelector(".deal-wheel");
 const spinner = wheel.querySelector(".spinner");
 const trigger = wheel.querySelector(".btn-spin");
 var checkvar = localStorage.getItem('checkvar');
+var gif = localStorage.getItem("gif");
+var timeSave = localStorage.getItem("timeSave");
 const ticker = wheel.querySelector(".ticker");
 const reaper = wheel.querySelector(".grim-reaper");
 const prizeSlice = 360 / prizes.length;
@@ -61,17 +63,27 @@ const prizeOffset = Math.floor(180 / prizes.length);
 const spinClass = "is-spinning";
 const selectedClass = "selected";
 const spinnerStyles = window.getComputedStyle(spinner);
+var history = document.getElementById("history");
 let tickerAnim;
 let rotation = 0;
 let currentSlice = 0;
 let prizeNodes;
-if (checkvar === true){
-  trigger.textContent = "Đã quay";
-  trigger.disabled = true;
-} else {
-  trigger.textContent = "Quay";
-  trigger.disabled = false;
+
+function handleCheckVar() {
+  if (checkvar === "penalty") {
+    trigger.textContent = "Đã quay";
+    document.getElementById("gif").textContent = gif;
+    document.getElementById("current-time").textContent = timeSave;
+    document.getElementById("history").style.display = "block";
+    trigger.disabled = true;
+  } else {
+    trigger.textContent = "Quay";
+    document.getElementById("history").style.display = "none";
+    trigger.disabled = false;
+  }
 }
+
+handleCheckVar();
 const createPrizeNodes = () => {
   prizes.forEach(({ text, color, reaction }, i) => {
     const rotation = ((prizeSlice * i) * -1) - prizeOffset;
@@ -134,7 +146,8 @@ const runTickerAnimation = () => {
 
 const selectPrize = () => {
   const selected = Math.floor(rotation / prizeSlice);
-  prizeNodes[selected].classList.add(selectedClass);
+  localStorage.setItem("gif", prizes[selected].text);
+   prizeNodes[selected].classList.add(selectedClass);
   reaper.dataset.reaction = prizeNodes[selected].dataset.reaction;
 };
 
@@ -144,8 +157,13 @@ trigger.addEventListener("click", () => {
   }
 
   trigger.disabled = true;
-  localStorage.setItem("checkvar", "true");
+  localStorage.setItem("checkvar", "penalty");
   trigger.textContent = "Đã quay";
+  var now = new Date();
+  var hour = now.getHours();
+  var minute = now.getMinutes();
+  var timeSpin = `${hour}:${minute < 10 ? '0' + minute : minute}`;
+  localStorage.setItem("timeSave", timeSpin);
   rotation = Math.floor(Math.random() * 360 + spinertia(2000, 5000));
   prizeNodes.forEach((prize) => prize.classList.remove(selectedClass));
   wheel.classList.add(spinClass);

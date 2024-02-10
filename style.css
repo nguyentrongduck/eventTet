@@ -15,6 +15,7 @@ body {
   overflow-x: hidden;
   background: #171720;
 }
+
 .container {
   text-align: center;
   font-family: "Sansita Swashed", Arial;
@@ -27,6 +28,22 @@ body {
 .container span{
   font-size: 14px;
   color: #969696;
+}
+#history, #current-time {
+  color: white;
+}
+#premium {
+  display: block;
+  color: hsl(350 60% 52%);
+  margin-top: 5px;
+}
+#gif {
+  color: hsl(350 60% 52%);
+}
+
+#history {
+  display: none;
+  margin-top: 10px;
 }
 .deal-wheel {
   --size: 300px;
