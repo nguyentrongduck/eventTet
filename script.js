@@ -6,7 +6,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-
+import 'https://tomashubelbauer.github.io/github-pages-local-storage/index.js';
 const prizes = [
   {
     text: "2 cái nịt",
