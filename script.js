@@ -77,7 +77,7 @@ let currentSlice = 0;
 let prizeNodes;
 
 function handleCheckVar() {
-  if (checkvar === "penalty") {
+  if ((checkvar === "penalty") && gif && timeSave) {
     trigger.textContent = "Đã quay";
     document.getElementById("gif").textContent = gif;
     document.getElementById("current-time").textContent = timeSave;
